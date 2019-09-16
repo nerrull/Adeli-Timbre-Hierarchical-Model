@@ -44,13 +44,13 @@ if __name__ == "__main__":
     from utils.windows import tukey_win
 
     from filterbank.two_stage_filterbank import TwoStageFilterBank
-    filename = '../data/dayvan.wav'
-    # filename = './data/C4-C5.wav'
-    # filename = './data/C-Cs.wav'
-    # filename = './data/C4-C5.wav'
+    filename = '../data/concat1.wav'
+    filename = '../data/bass_synthetic_046_pack.wav'
+    #filename = '../data/dayvan.wav'
 
-    num_seconds = 3.
-    segment_offset_seconds = 10
+
+    num_seconds = 10
+    segment_offset_seconds = 0
 
     # Load the file
     sf = LibrosaSoundFileLoader(filename)
@@ -67,15 +67,12 @@ if __name__ == "__main__":
     inhibited_envelopes = filterbank.inhibited_envelopes
 
     f = plt.figure(figsize=(20, 10))
-    ax = f.add_subplot(121)
-    im = ax.imshow(raw_envelopes, aspect=float(raw_envelopes.shape[1]) / raw_envelopes.shape[0] * 0.5,
+    im = plt.imshow(raw_envelopes, aspect=float(raw_envelopes.shape[1]) / raw_envelopes.shape[0] * 0.5,
                    interpolation='nearest')
-    ax.set_title("Compressed Envelopes")
+    plt.title("ERB band envelopes")
+    plt.xlabel("Time")
+    plt.ylabel("ERB band index")
 
-    ax = f.add_subplot(122)
-    im = ax.imshow(inhibited_envelopes, aspect=float(inhibited_envelopes.shape[1]) / inhibited_envelopes.shape[0] * 0.5,
-                   interpolation='nearest')
-    ax.set_title("Inhibited and rectified")
 
     plt.figure()
     plt.title("Instantaneous Roughness")

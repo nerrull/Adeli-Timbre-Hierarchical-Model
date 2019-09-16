@@ -35,7 +35,6 @@ if save_images:
     if not exists(out_dir):
         makedirs(out_dir)
 
-
 # Load the file
 sf = LibrosaSoundFileLoader(filename)
 signal = np.array(sf.get_segment(num_seconds, segment_offset_seconds))
@@ -43,6 +42,7 @@ frame_duration = slice_length/sf.get_sample_rate()
 frame_rate  =1/frame_duration
 frame_duration_ms = frame_duration*1000
 
+print ("framerate is: {}".format(frame_rate))
 filterbank_sliced = TwoStageFilterBank(
     first_stage_downsample=1, v_first_stage=erb_filters)
 filterbank_sliced.generateFilterbanks(slice_length, sample_rate=sf.get_sample_rate())
