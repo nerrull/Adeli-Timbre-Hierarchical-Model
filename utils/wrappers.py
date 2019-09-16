@@ -3,7 +3,7 @@ from librosa.feature import mfcc,delta, melspectrogram
 from librosa.filters import get_window
 from librosa.core.spectrum import stft
 from scipy.fftpack import dct
-from filterbank.windows import Windower, HannWindower
+from utils.windows import Windower, HannWindower
 from filterbank.two_stage_filterbank import TwoStageFilterBank
 from filterbank.filterbank_statistics import modulation_powers, marginal_statistics
 import numpy as np
@@ -13,10 +13,11 @@ import pandas as pd
 class FilterbankWrapper():
     def __init__(self,  sample_rate, window_size, window_stride):
         self.sample_rate = sample_rate
-        self.filterbank = TwoStageFilterBank(first_stage_downsample=10, second_stage_downsample=1, v_first_stage=1)
-        self.filterbank.generateFilterbanks(window_size, sample_rate=sample_rate)
+        self.fb = TwoStageFilterBank(first_stage_downsample=10,
+                                    second_stage_downsample=1, v_first_stage=1)
+        self.fb.generateFilterbanks(window_size, sample_rate=sample_rate)
         self.windower = HannWindower(window_size,  stride=window_stride)
-        self.n_bands = len(self.filterbank.first_stage.center_frequencies)
+        self.n_bands = len(self.fb.first_stage.center_frequencies)
 
     def get_num_bands(self):
         return self.n_bands
@@ -30,8 +31,13 @@ class FilterbankWrapper():
         dcts = []
 
         for i,slice in enumerate(self.windower.forward(signal)):
-            raw_env, env_inh, spectral_env, temp_env, amp_env = \
-                self.filterbank.forward(slice)
+            self.fb.forward(slice)
+            raw_env = self.fb.raw_envelopes
+            env_inh = self.fb.inhibited_envelopes
+            spectral_env  = self.fb.spectral_envelope
+            temp_env = self.fb.temporal_envelope
+            amp_env = self.fb.amplitude_modulation_envelopes
+
             spectral_env = spectral_env.reshape((-1,1))
             amp_env = np.mean(amp_env, axis =2).reshape((self.n_bands, -1,1))
             if i==0:

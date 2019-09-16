@@ -1,5 +1,3 @@
-
-
 import numpy as np
 from ltfatpy.fourier.pgauss import pgauss
 from utils.plotting import plot_windows, plotCenterFrequencies
@@ -79,7 +77,7 @@ def adeliErbletWin( V, sr, Ls,  max_freq = None, plot=False, dtype=np.float64):
     erbMax= hzToErb(fmax)
     erbMin = hzToErb(fmin)
     Nf = int(V*np.ceil( erbMax- erbMin) ) #number of frequency channels
-    Nf = 24
+    #Nf = 24
     erbSpace = np.linspace(erbMin, erbMax, Nf)
     centerFrequencies = erbToHz(erbSpace)
     cf = centerFrequencies

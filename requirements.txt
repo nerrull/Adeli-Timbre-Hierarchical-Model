@@ -1,0 +1,7 @@
+numpy
+pydub
+
+ltfatpy
+librosa
+scipy
+matplotlib

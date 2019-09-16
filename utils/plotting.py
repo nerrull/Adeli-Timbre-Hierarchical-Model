@@ -1,6 +1,7 @@
 
 import matplotlib.pyplot as plt
 import numpy as np
+
 def plot2DdataImage(data, title,figure =None,  ratio = 0.5,
                     subplot_position =111,show=False, colorbar =True ):
     if figure is None:
@@ -14,7 +15,6 @@ def plot2DdataImage(data, title,figure =None,  ratio = 0.5,
         plt.colorbar(im)
     if show:
         plt.show()
-
 
 def plot_marginals(m, v_unitless, s, k, var, std_dev, title):
     fig, axes = plt.subplots(3, 2)
@@ -45,7 +45,6 @@ def plot_marginals(m, v_unitless, s, k, var, std_dev, title):
     plt.imshow(norm_features)
     plt.title("Normalized marginal statistics")
 
-
 def plot_marginal(title, mean, norm_var,skew,kurtosis, size = (6,3)):
     f, ax = plt.subplots(2, 2, sharex='col', figsize=size)
     f.suptitle(title)
@@ -74,7 +73,6 @@ def plot_correlation(corr, title, close =True,  size = (4,4)):
         plt.close()
     return f, ax
 
-
 def plot_filterbank_channels_second_stage(am_env, minChannel, maxChannel, close =True, size = (2, 1)):
     axes = []
     for band_index in range(minChannel, maxChannel):
@@ -88,7 +86,6 @@ def plot_filterbank_channels_second_stage(am_env, minChannel, maxChannel, close 
         if close:
             plt.close()
     return axes
-
 
 def plot_modulation_power(mp, axes =None, close =True, size = (3,4)):
     f, ax =plt.subplots(1, 1, figsize=size)
@@ -106,7 +103,6 @@ def plot_modulation_power(mp, axes =None, close =True, size = (3,4)):
     if close:
         plt.close()
     return f,ax
-
 
 def plot_individual_channel(channels, minChannel, maxChannel, close =True, size = (2, 1)):
     axes = []

@@ -105,4 +105,5 @@ venv.bak/
 
 data
 .idea
-nsgt
+test/out
+/test/channelUpsamplingTest.py

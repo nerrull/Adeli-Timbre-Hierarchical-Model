@@ -1,8 +1,6 @@
 
 import numpy as np
 from math import exp, floor, ceil, pi
-import scipy.signal as scignal
-import librosa.filters
 from librosa.filters import get_window
 
 def hannwin(l):

@@ -19,13 +19,16 @@ def stage_one_analyis(filterbank, plot = True):
         subband_cross_correlations_mcdermott(envelopes,mean,variance)
 
     if plot:
-        plot_marginal("Envelope statistics",mean, norm_var, skew, kurtosis)
-        plot_marginal("Inhibited envelope statistics",mean_inhib,
+        plot_marginal("Spectral envelope moments",mean, norm_var, skew,
+                      kurtosis)
+        plot_marginal("Inhibited spectral envelope moments",mean_inhib,
                       norm_var_inhib,
                       skew_inhib, kurtosis_inhib)
 
-        plot_correlation(cross_corr, "Compressed env cross_corr", close=False)
-        plot_correlation(cross_corr_inhib, "Inhibited env cross_corr",close=False)
+        plot_correlation(cross_corr, "Compressed env cross-correlation",
+                         close=False)
+        plot_correlation(cross_corr_inhib, "Inhibited env cross-correlation",
+                         close=False)
         plt.show()
 
     return variance
@@ -41,13 +44,13 @@ if __name__ == "__main__":
     from utils.windows import tukey_win
 
     from filterbank.two_stage_filterbank import TwoStageFilterBank
-    filename = './data/dayvan.wav'
+    filename = '../data/dayvan.wav'
     # filename = './data/C4-C5.wav'
     # filename = './data/C-Cs.wav'
     # filename = './data/C4-C5.wav'
 
-    num_seconds = 15.
-    segment_offset_seconds = 0
+    num_seconds = 3.
+    segment_offset_seconds = 10
 
     # Load the file
     sf = LibrosaSoundFileLoader(filename)
@@ -82,7 +85,6 @@ if __name__ == "__main__":
 
     mp = modulation_powers(filterbank.amplitude_modulation_envelopes, variance)
     plot_modulation_power(mp,axes = [filterbank.first_stage_center_frequencies.astype(np.int32), filterbank.second_stage_center_frequencies.astype(np.int32)], close = False)
-
 
     plt.show()
 

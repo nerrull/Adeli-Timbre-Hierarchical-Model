@@ -17,7 +17,7 @@ from warnings import warn
 realized = False
         
 if not realized:
-    # try to use FFT3 if available, else use numpy.fftpack
+    # try to use FFTW3 if available, else use numpy.fftpack
     try:
         import fftw3
     except ImportError:

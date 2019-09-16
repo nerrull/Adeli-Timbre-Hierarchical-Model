@@ -1,11 +1,11 @@
 from pydub import AudioSegment
+import librosa
+
 import numpy as np
 import wave
 import struct
-import librosa
 
 def export_multichannel(channels, framerate, outfile):
-
     channels_16 = []
     for index, channel in enumerate(channels):
         channel_int16 = (np.real(channel)).astype(np.int16)

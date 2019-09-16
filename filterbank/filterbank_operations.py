@@ -20,6 +20,7 @@ def compress_coefficients(c):
         WINCor=WINCor./repmat(WSRvec,1,Pos_Chans_No);
 '''
 def get_lateral_inhibition_coefficients(filterEnvelopes, plot=False):
+    eps = 0.0000001
     numFilters = len(filterEnvelopes)
     filterCorrelations = np.zeros((numFilters,numFilters))
     for index in range(0, len(filterEnvelopes)-1):
@@ -27,7 +28,7 @@ def get_lateral_inhibition_coefficients(filterEnvelopes, plot=False):
         filterCorrelations[index+1, index] = filterCorrelations[index, index+1]
 
     row_sums = np.sum(filterCorrelations, axis=1)
-    filterCorrelations = filterCorrelations/row_sums[:, np.newaxis]
+    filterCorrelations = filterCorrelations/(row_sums[:, np.newaxis] + eps)
 
     if plot:
         plt.figure()

@@ -1,6 +1,7 @@
 import numpy as np
 from utils.windows import tukey_win
 from matplotlib import pyplot as plt
+
 def make_unit_window(l):
     transition = min(512, l / 4)
     window = tukey_win(l, tr_area=transition)

@@ -1,15 +1,9 @@
-import struct
-
-import matplotlib.pyplot as plt
 import numpy as np
-
 from filterbank.nsgt import NSGT_ERB, upsample_channels
 from filterbank.erbletwin import get_carrier_frequency_gain
 from filterbank.filterbank_operations import get_lateral_inhibition_coefficients, apply_inhibition, half_wave_rectify, \
-    remove_DC_channels, extract_envelope, compress_coefficients, downsample, get_spectral_envelope, rms, zero_pad, \
-    second_stage_amp_mod_correlation, get_roughness
+    remove_DC_channels, extract_envelope, compress_coefficients, downsample, get_spectral_envelope, rms, get_roughness
 from utils.plotting import plot_windows, plot_individual_channel
-from utils.windows import tukey_win
 
 class TwoStageFilterBank():
     def __init__(self, first_stage_downsample = 10, second_stage_downsample=1,
@@ -73,6 +67,10 @@ class TwoStageFilterBank():
             self.raw_envelopes)
         self.effective_roughness, self.instantaneous_roughness = get_roughness(
             self.amp_mod, self.mod_depth, self.second_stage_sr)
+
+    def forward_first_stage(self, signal):
+        self.raw_envelopes, self.inhibited_envelopes, self.spectral_envelope \
+            = self.applyFirstStage(signal)
 
     def getFeatures(self):
         return self.raw_envelopes,self.inhibited_envelopes, self.spectral_envelope, self.temporal_envelope, self.amplitude_modulation_envelopes
