@@ -1,7 +1,7 @@
 # Overview
 This is work is a python implementation of the biologically inspired cochlear filterbank proposed in :
 
-**A Flexible Bio-inspired Hierarchical Model for Analyzing Musical Timbre **
+**A Flexible Bio-inspired Hierarchical Model for Analyzing Musical Timbre**
 by *Adeli, M., Rouat, J., Wood, S., Molotchnikoff, S. and Plourde, E.*
 This implementation was developed by Etienne Richan based on the original Octave code as part of his master's thesis.
 
@@ -13,7 +13,7 @@ The energy in each channel provides a low-resolution representation of the spect
 A second stage of the filterbank extracts the amplitude modulations in each channel and uses this information to produce a smooth
 temporal envelope as well as a time-varying profile of perceptual roughness.
 
-#The ERB Scale
+# The ERB Scale
 The ERB scale is a nonlinear mapping of frequency to units of equal perceptual sensitivity.
 
 In other words, we perceive a 20 hz difference much more easily at 100 Hz than at 2000 Hz. Because our cochlea is a physical system, 
@@ -88,8 +88,7 @@ This work is a reimplementation of the cochlear filterbank by Adeli et al.
 }
 ```
 
-We use a modified (and less optimized) version Thomas Grill's implementation of the [Non Stationary Discrete Gabor 
-Transform](https://github.com/grrrr/nsgt) on github
+We use a modified (and less optimized) version [Thomas Grill's implementation](https://github.com/grrrr/nsgt) of the Non-Stationary Discrete Gabor Transform
 ```
 Thomas Grill, 2011-2017
 http://grrrr.org/nsgt
